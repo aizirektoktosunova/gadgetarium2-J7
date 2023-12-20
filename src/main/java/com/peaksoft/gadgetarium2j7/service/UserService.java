@@ -1,7 +1,5 @@
 package com.peaksoft.gadgetarium2j7.service;
 import com.peaksoft.gadgetarium2j7.model.entity.Role;
-import com.peaksoft.gadgetarium2j7.repository.RoleRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import com.peaksoft.gadgetarium2j7.mapper.UserMapper;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationRequest;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationResponse;
@@ -19,10 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
-    private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     public RegistrationResponse registration(RegistrationRequest request){
         User user =userMapper.mapToEntity(request);
@@ -64,16 +60,11 @@ public class UserService {
                     throw new RuntimeException("password without letter");}
             }
 
-
-        System.out.println(request.getPassword());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
         List<Role> roles = new ArrayList<>();
-        Role role = roleRepository.findByName("USER");
-        if (role == null){
-            role = new Role("USER");
-        }
+        Role role = new Role("USER");
         roles.add(role);
         user.setRoles(roles);
+        userRepository.save(user);
         return userMapper.registration(user);
     }
 }
