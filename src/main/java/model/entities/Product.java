@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import model.enums.CaseShape;
 import model.enums.Memory;
+import model.enums.SubCategory;
 import model.enums.WirelessInterface;
 
 import java.time.LocalDate;
@@ -24,7 +25,6 @@ public class Product {
     private String name;
     private int weight;
     private String color;
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "brands_id")
     private Brand brands;
@@ -38,23 +38,22 @@ public class Product {
     private LocalDate creatDate;
     private String rating;
     private double price;
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Subcategory_id")
+    @Enumerated(EnumType.STRING)
     private SubCategory subCategory;
     @Enumerated(EnumType.STRING)
     private CaseShape caseShape;
     private boolean waterproof;
     @Enumerated(EnumType.STRING)
     private WirelessInterface w_i;
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name = "products_and_orders",
     joinColumns =@JoinColumn(name = "products_id"),
     inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Order>orders;
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "history_id")
+    private HistoryOfOrder history;
 }

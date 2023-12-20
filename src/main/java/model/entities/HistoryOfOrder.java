@@ -1,5 +1,6 @@
 package model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,9 @@ public class HistoryOfOrder {
     private LocalDate orderTime;
     @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "history")
     private List<Product> products;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "history")
+    private User user;
 
 
 }

@@ -1,12 +1,12 @@
 package model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
 
 @Entity
 @Table(name = "payment_pay_cards")
@@ -25,7 +25,7 @@ public class PaymentPayCard {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id")
     private User users;
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "paymentPayCard")
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "paymentPayCard")
     private List<Order> orders;
 
 }
