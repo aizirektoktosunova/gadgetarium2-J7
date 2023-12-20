@@ -1,4 +1,4 @@
-package model.enums;
+package com.peaksoft.gadgetarium2j7.model.enums;
 
 public enum SubCategory {
     watchbands, charging_device,

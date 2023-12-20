@@ -1,4 +1,4 @@
-package model.entities;
+package com.peaksoft.gadgetarium2j7.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,19 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "categories")
+@Table(name = "createNewsLetter")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Category {
+public class CreateNewsLetter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
-    private List<Product> products;
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "createNewsLetter")
+    private User user;
 }

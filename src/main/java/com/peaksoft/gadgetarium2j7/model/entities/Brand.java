@@ -1,27 +1,24 @@
-package model.entities;
+package com.peaksoft.gadgetarium2j7.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import model.enums.Status;
 
 import java.util.List;
 
 @Entity
-@Table(name = "deliveries")
+@Table(name = "brands")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Delivery {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Enumerated(EnumType.STRING)
-    private Status status;
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "delivery")
-    private List<Order> orders;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brands")
+    private List<Product> products;
 }

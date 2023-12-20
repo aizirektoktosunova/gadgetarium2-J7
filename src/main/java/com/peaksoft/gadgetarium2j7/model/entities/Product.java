@@ -1,14 +1,14 @@
-package model.entities;
+package com.peaksoft.gadgetarium2j7.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.peaksoft.gadgetarium2j7.model.enums.SubCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import model.enums.CaseShape;
-import model.enums.Memory;
-import model.enums.SubCategory;
-import model.enums.WirelessInterface;
+import com.peaksoft.gadgetarium2j7.model.enums.CaseShape;
+import com.peaksoft.gadgetarium2j7.model.enums.Memory;
+import com.peaksoft.gadgetarium2j7.model.enums.WirelessInterface;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -48,12 +48,16 @@ public class Product {
     private boolean waterproof;
     @Enumerated(EnumType.STRING)
     private WirelessInterface w_i;
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name = "products_and_orders",
-    joinColumns =@JoinColumn(name = "products_id"),
-    inverseJoinColumns = @JoinColumn(name = "orders_id"))
-    private List<Order>orders;
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "products_and_orders", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "orders_id"))
+    private List<Order> orders;
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "history_id")
     private HistoryOfOrder history;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "detailsProduct_id")
+    private DetailsProduct detailsProduct;
 }
