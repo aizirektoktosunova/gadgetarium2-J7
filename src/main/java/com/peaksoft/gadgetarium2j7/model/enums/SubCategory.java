@@ -1,9 +1,9 @@
 package com.peaksoft.gadgetarium2j7.model.enums;
 
 public enum SubCategory {
-    watchbands, charging_device,
+    WATCHBANDS, CHARGING_DEVICE,
 
-    screen_protection, cases, coasters, cables_adapters,
+    SCREEN_PROTECTION, CASES, COASTERS, CABLES_ADAPTERS,
 
-    external_batteries
+    EXTERNAL_BATTERIES
 }
