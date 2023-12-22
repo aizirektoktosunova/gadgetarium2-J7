@@ -25,9 +25,6 @@ public class Product {
     private String name;
     private int weight;
     private String color;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "brands_id")
-    private Brand brands;
     private String screenSize;
     @Enumerated(EnumType.STRING)
     private Memory memory;
@@ -52,12 +49,4 @@ public class Product {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "products_and_orders", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Order> orders;
-    @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "history_id")
-    private HistoryOfOrder history;
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "detailsProduct_id")
-    private DetailsProduct detailsProduct;
 }

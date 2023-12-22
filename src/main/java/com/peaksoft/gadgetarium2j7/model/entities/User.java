@@ -30,25 +30,21 @@ public class User {
     private LocalDate createDate;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_orders", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
     private Order orders;
-    @Enumerated(EnumType.STRING)
-    private Role role;
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "users")
-    private List<PaymentPayCard> paymentPayCard;
+    private List<PayCard> paymentPayCard;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "basket_id")
     private Basket basket;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "history_id")
-    private HistoryOfOrder history;
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "createNewsLetter_id")
-    private CreateNewsLetter createNewsLetter;
+    @JoinColumn(name = "newsLetter_id")
+    private NewsLetter newsLetter;
 }

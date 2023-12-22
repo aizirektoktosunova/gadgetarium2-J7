@@ -21,7 +21,7 @@ public class Basket {
     private double discount;
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "users_applications", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "applications_id"))
+    @JoinTable(name = "users_baskets", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "baskets_id"))
     private List<Product> products;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "basket")

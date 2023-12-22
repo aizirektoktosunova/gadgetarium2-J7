@@ -11,12 +11,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateNewsLetter {
+public class NewsLetter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "createNewsLetter")
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "newsLetter")
     private User user;
 }

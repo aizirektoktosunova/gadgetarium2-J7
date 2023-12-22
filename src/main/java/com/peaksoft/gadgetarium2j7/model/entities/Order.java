@@ -26,8 +26,8 @@ public class Order {
     private Delivery delivery;
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "paymentPayCard_id")
-    private PaymentPayCard paymentPayCard;
+    @JoinColumn(name = "payCard_id")
+    private PayCard payCard;
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "orders")
     private List<Product> products;
