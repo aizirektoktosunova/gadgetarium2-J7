@@ -21,4 +21,5 @@ public class Brand {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brands")
     private List<Product> products;
+
 }
