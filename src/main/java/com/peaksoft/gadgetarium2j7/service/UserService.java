@@ -1,9 +1,9 @@
 package com.peaksoft.gadgetarium2j7.service;
-import com.peaksoft.gadgetarium2j7.model.entity.Role;
+import com.peaksoft.gadgetarium2j7.model.entities.Product;
 import com.peaksoft.gadgetarium2j7.mapper.UserMapper;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationRequest;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationResponse;
-import com.peaksoft.gadgetarium2j7.model.entity.User;
+import com.peaksoft.gadgetarium2j7.model.entities.User;
 import com.peaksoft.gadgetarium2j7.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,8 +60,8 @@ public class UserService {
                     throw new RuntimeException("password without letter");}
             }
 
-        List<Role> roles = new ArrayList<>();
-        Role role = new Role("USER");
+        List<Product.Role> roles = new ArrayList<>();
+        Product.Role role = new Product.Role("USER");
         roles.add(role);
         user.setRoles(roles);
         userRepository.save(user);
