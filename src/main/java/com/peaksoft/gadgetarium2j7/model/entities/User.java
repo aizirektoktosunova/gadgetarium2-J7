@@ -1,5 +1,4 @@
 package com.peaksoft.gadgetarium2j7.model.entities;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.peaksoft.gadgetarium2j7.model.enums.Gender;
 import com.peaksoft.gadgetarium2j7.model.enums.Role;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,4 +45,5 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "newsLetter_id")
     private NewsLetter newsLetter;
+
 }
