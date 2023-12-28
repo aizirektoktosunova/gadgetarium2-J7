@@ -1,6 +1,7 @@
 package com.peaksoft.gadgetarium2j7.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.peaksoft.gadgetarium2j7.model.enums.SubCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import com.peaksoft.gadgetarium2j7.model.enums.Memory;
 import com.peaksoft.gadgetarium2j7.model.enums.WirelessInterface;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -49,4 +51,21 @@ public class Product {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "products_and_orders", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Order> orders;
+
+    @Entity
+    @Table(name = "roles")
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class Role {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        private String name;
+        @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "roles")
+        private List<User> users = new ArrayList<>();
+        public Role(String name){
+            this.name = name;
+        }
+    }
 }
