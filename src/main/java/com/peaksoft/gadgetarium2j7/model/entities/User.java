@@ -1,18 +1,14 @@
 package com.peaksoft.gadgetarium2j7.model.entities;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.peaksoft.gadgetarium2j7.model.enums.Gender;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.peaksoft.gadgetarium2j7.model.enums.Role;
 
-import javax.management.relation.Role;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -20,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User   {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +27,7 @@ public class User   {
     private String email;
     private String address;
     private int age;
+    private String telNumber;
     private LocalDate createDate;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -55,8 +52,4 @@ public class User   {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "newsLetter_id")
     private NewsLetter newsLetter;
-
-
-
-
 }

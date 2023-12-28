@@ -12,8 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
