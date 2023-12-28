@@ -1,12 +1,11 @@
 package com.peaksoft.gadgetarium2j7.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.peaksoft.gadgetarium2j7.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.peaksoft.gadgetarium2j7.model.enums.Gender;
-import com.peaksoft.gadgetarium2j7.model.enums.Role;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,8 +28,12 @@ public class User {
     private int age;
     private String telNumber;
     private LocalDate createDate;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
