@@ -3,17 +3,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
-@Table(name = "discounts")
-@Getter
+@Table(name="brands")
 @Setter
+@Getter
 @NoArgsConstructor
-public class Discount {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String sizeDiscount;
-    private String dateStart;
-    private String dateEnd;
+    Long id;
+    String name;
+    String image;
+
 }
