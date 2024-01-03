@@ -15,6 +15,10 @@ public class NewsLetter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String nameSender;
+    private String descriptionSender;
+    private String startLetter;
+    private String endLetter;
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "newsLetter")
     private User user;

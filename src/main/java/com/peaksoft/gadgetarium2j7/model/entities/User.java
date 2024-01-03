@@ -28,7 +28,9 @@ public class User {
     private int age;
     private String telNumber;
     private LocalDate createDate;
-
+    private boolean subscribe;
+    private int pinCode;
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -55,4 +57,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "newsLetter_id")
     private NewsLetter newsLetter;
+
+
+
 }

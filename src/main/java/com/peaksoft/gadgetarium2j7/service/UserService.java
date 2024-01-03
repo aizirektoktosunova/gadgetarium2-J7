@@ -1,5 +1,4 @@
 package com.peaksoft.gadgetarium2j7.service;
-
 import com.peaksoft.gadgetarium2j7.mapper.UserMapper;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationRequest;
 import com.peaksoft.gadgetarium2j7.model.dto.RegistrationResponse;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @Service
@@ -20,6 +20,7 @@ import java.util.List;
 public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+
 
     public RegistrationResponse registration(RegistrationRequest request) {
         User user = userMapper.mapToEntity(request);
@@ -80,4 +81,39 @@ public class UserService {
         userRepository.save(user);
         return userMapper.registration(user);
     }
+
+//    public LoginResponse loginResponse(LoginRequest request) {
+//        try {
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException("Invalid username or password");
+//        }
+//        User user = userRepository.findByEmail(request.getEmail())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        String jwt = jwtUtil.generateToke(user);
+//        return loginMapper.matToResponse(jwt, user);
+//    }
+
+    public int pinCode(){
+        Random random = new Random();
+        return random.nextInt(100000,999999);
+    }
+    public String forgotPassword(String email){
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found with email" + email ));
+        return null;
+    }
+
+
+
+//    public LoginResponse loginResponse(LoginRequest request) {
+//        try {
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException("Invalid username or password");
+//        }
+//        User user = userRepository.findByEmail(request.getEmail())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        String jwt = jwtUtil.generateToke(user);
+//        return loginMapper.matToResponse(jwt, user);
+//    }
 }
