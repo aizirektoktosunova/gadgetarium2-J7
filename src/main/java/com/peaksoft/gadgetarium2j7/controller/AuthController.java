@@ -38,8 +38,6 @@ public class AuthController {
         String token = jwtUtil.generateToken(userDetailsService.loadUserByUsername(loginRequest.getEmail()));
         return loginMapper.mapToResponse(token, user.getRoles().get(0).getName());
     }
-
-
 }
 
 
