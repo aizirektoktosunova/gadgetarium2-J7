@@ -1,4 +1,4 @@
-package com.peaksoft.gadgetarium2j7.service.impl;
+package com.peaksoft.gadgetarium2j7.service;
 
 import com.peaksoft.gadgetarium2j7.repository.UserRepository;
 import lombok.AccessLevel;

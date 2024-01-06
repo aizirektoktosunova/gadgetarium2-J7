@@ -1,7 +1,7 @@
 package com.peaksoft.gadgetarium2j7.config;
 
 import com.peaksoft.gadgetarium2j7.config.jwt.JwtFilter;
-import com.peaksoft.gadgetarium2j7.service.impl.UserDetailServiceImpl;
+import com.peaksoft.gadgetarium2j7.service.UserDetailServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

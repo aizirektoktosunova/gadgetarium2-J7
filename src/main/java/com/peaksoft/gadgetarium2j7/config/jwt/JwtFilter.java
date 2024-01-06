@@ -1,6 +1,6 @@
 package com.peaksoft.gadgetarium2j7.config.jwt;
 
-import com.peaksoft.gadgetarium2j7.service.impl.UserDetailServiceImpl;
+import com.peaksoft.gadgetarium2j7.service.UserDetailServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
