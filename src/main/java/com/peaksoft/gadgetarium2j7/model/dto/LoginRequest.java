@@ -1,11 +1,17 @@
 package com.peaksoft.gadgetarium2j7.model.dto;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
-@Setter
 @Getter
+@Setter
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginRequest {
-    private String email;
-    private String password;
+
+    String email;
+    String password;
 }
