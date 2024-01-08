@@ -7,6 +7,7 @@ import com.peaksoft.gadgetarium2j7.model.entities.User;
 import com.peaksoft.gadgetarium2j7.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Random;
 public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     public RegistrationResponse registration(RegistrationRequest request) {
@@ -77,43 +79,11 @@ public class UserService {
         List<Role> roles = new ArrayList<>();
         Role role = new Role("USER");
         roles.add(role);
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        user.setPassword(encodedPassword);
         user.setRoles(roles);
         userRepository.save(user);
         return userMapper.registration(user);
     }
 
-//    public LoginResponse loginResponse(LoginRequest request) {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-//        } catch (RuntimeException e) {
-//            throw new RuntimeException("Invalid username or password");
-//        }
-//        User user = userRepository.findByEmail(request.getEmail())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        String jwt = jwtUtil.generateToke(user);
-//        return loginMapper.matToResponse(jwt, user);
-//    }
-
-    public int pinCode(){
-        Random random = new Random();
-        return random.nextInt(100000,999999);
-    }
-    public String forgotPassword(String email){
-        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found with email" + email ));
-        return null;
-    }
-
-
-
-//    public LoginResponse loginResponse(LoginRequest request) {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-//        } catch (RuntimeException e) {
-//            throw new RuntimeException("Invalid username or password");
-//        }
-//        User user = userRepository.findByEmail(request.getEmail())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        String jwt = jwtUtil.generateToke(user);
-//        return loginMapper.matToResponse(jwt, user);
-//    }
 }

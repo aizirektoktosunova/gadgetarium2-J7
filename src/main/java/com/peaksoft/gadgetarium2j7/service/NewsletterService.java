@@ -14,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.beans.Encoder;
 import java.util.List;
 import java.util.Random;
 
@@ -26,6 +28,7 @@ public class NewsletterService {
     private final NewsletterRepository repository;
     private final UserRepository userRepository;
     private final JavaMailSender javaMailSender;
+    private final PasswordEncoder passwordEncoder;
 
     public void save(NewsletterRequest request) {
         NewsLetter newsletter = newsletterMapper.mapToEntity(request);
@@ -85,7 +88,7 @@ public class NewsletterService {
             User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
             if (pinCode == user.getPinCode()) {
-                user.setPassword(newPassword);
+                user.setPassword(passwordEncoder.encode(newPassword));
                 userRepository.save(user);
                 return "Сброс пароля прошел успешно";
             }
